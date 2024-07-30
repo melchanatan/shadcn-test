@@ -82,8 +82,8 @@ export function DatePickerForm() {
                   <Calendar
                     mode="single"
                     selected={field.value}
-                    onSelect={() => {
-                      field.onChange();
+                    onSelect={(value) => {
+                      field.onChange(value);
                       setIsOpen(false);
                     }}
                     disabled={(date) =>
