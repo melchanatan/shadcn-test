@@ -1,9 +1,30 @@
+"use client";
 import { Switch } from "@/components/ui/switch";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="container">
       <div className="flex items-center space-x-2">
         <Switch id="airplane-mode" />
+        <Card>
+          <CardHeader className="pb-2">
+            <CardDescription>This Week</CardDescription>
+            <CardTitle className="text-4xl">$1,329</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-xs text-muted-foreground">
+              +25% from last week
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </main>
   );
