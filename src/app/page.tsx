@@ -8,11 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { DatePickerForm } from "@/components/date-form";
 
 export default function Home() {
   return (
     <main className="container">
-      <div className="flex items-center space-x-2">
+      {/* <div className="flex items-center space-x-2">
         <Switch id="airplane-mode" />
         <Card>
           <CardHeader className="pb-2">
@@ -25,7 +26,8 @@ export default function Home() {
             </div>
           </CardContent>
         </Card>
-      </div>
+      </div> */}
+      <DatePickerForm />
     </main>
   );
 }

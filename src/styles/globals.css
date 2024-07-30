@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -60,7 +59,6 @@
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
@@ -71,5 +69,5 @@
 }
 
 .container {
-  @apply max-w-screen-xl mx-auto px-4;
+  @apply max-w-screen-xl mx-auto px-8;
 }
