@@ -1,0 +1,31 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.1
+2 info using node@v20.16.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/app/.npmrc
+5 silly config load:file:/home/node/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm run production
+8 verbose argv "run" "production"
+9 verbose logfile logs-max:10 dir:/home/node/.npm/_logs/2024-08-06T06_28_33_849Z-
+10 verbose logfile /home/node/.npm/_logs/2024-08-06T06_28_33_849Z-debug-0.log
+11 silly logfile done cleaning log files
+12 verbose stack Error: Missing script: "production"
+12 verbose stack
+12 verbose stack To see a list of scripts, run:
+12 verbose stack   npm run
+12 verbose stack     at #run (/usr/local/lib/node_modules/npm/lib/commands/run-script.js:110:13)
+12 verbose stack     at async RunScript.exec (/usr/local/lib/node_modules/npm/lib/commands/run-script.js:39:7)
+12 verbose stack     at async Npm.exec (/usr/local/lib/node_modules/npm/lib/npm.js:207:9)
+12 verbose stack     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli/entry.js:74:5)
+13 error Missing script: "production"
+13 error
+13 error To see a list of scripts, run:
+13 error   npm run
+14 verbose cwd /app
+15 verbose os Linux 6.9.8-orbstack-00170-g7b4100b7ced4
+16 verbose node v20.16.0
+17 verbose npm  v10.8.1
+18 verbose exit 1
+19 verbose code 1
+20 error A complete log of this run can be found in: /home/node/.npm/_logs/2024-08-06T06_28_33_849Z-debug-0.log
