@@ -2,7 +2,7 @@ import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { db } from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,35 +16,34 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
+import { userPostSchema } from "@/lib/validation/user";
+import { stringify } from "querystring";
 
-const FormSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
-  }),
-});
+
 
 export const InputForm = () => {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof userPostSchema>>({
+    resolver: zodResolver(userPostSchema),
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    // show validation toast
-    toast("You submitted the following values:", {
-      description: `
-        Your name is now ${data.username}. \n
-        Your name is now ${data.password}.
-      `,
-      action: {
-        label: "Undo",
-        onClick: () => console.log("Implement undo action"),
+  async function onSubmit(data: z.infer<typeof userPostSchema>) {
+    const response = await fetch("/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    });
+      body: JSON.stringify(data),
+    })
 
-    // send data to database
+    console.log(response.ok)
+
+    if (response?.ok) {
+      return toast(`Sucx ${response.ok}`, {
+        description: "shit",
+      });
+    }
+
+    return toast("Successfully update value");
   }
 
   return (

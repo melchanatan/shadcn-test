@@ -10,7 +10,7 @@ export async function GET() {
   }
 }
 
-export async function POST(params) {
+export async function POST(req: Request) {
   await db.user.create({
     data: {
       name: "Alice",
@@ -23,12 +23,4 @@ export async function POST(params) {
       },
     },
   });
-
-  const allUsers = await db.user.findMany({
-    include: {
-      posts: true,
-      profile: true,
-    },
-  });
-  console.dir(allUsers, { depth: null });
 }
