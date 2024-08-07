@@ -3,9 +3,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    links:
+      - db:database
     volumes:
-      - /usr/app/node_modules
-      - .:/usr/app/
+      - /app/node_modules
+      - .:/app/
     ports:
       - "3000:3000"
     tty: true
@@ -16,18 +18,14 @@ services:
   db:
     image: postgres:15
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - prisma_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
     environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
+      - POSTGRES_USER=prisma
+      - POSTGRES_PASSWORD=prisma
+      - POSTGRES_DB=prisma
 
 volumes:
-  postgres_data:
+  prisma_data:
     driver: local
-  postgres_keycloak:
-    driver: local
-
-networks:
-  keycloak-network:
-    driver: bridge
