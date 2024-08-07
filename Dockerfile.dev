@@ -4,8 +4,10 @@ WORKDIR /app
 
 COPY package.json ./
 COPY package-lock.json ./
+COPY ./prisma prisma
 
 RUN npm install --silent
+RUN npx prisma migrate dev --name init
 
 COPY . .
 
