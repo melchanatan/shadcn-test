@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { InputForm } from "@/components/input-form";
+import NavDrawer from "@/components/form-drawer";
+
 export default function Home() {
   return (
     <main className="container flex items-start justify-center h-[60dvh] flex-col">

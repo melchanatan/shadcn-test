@@ -27,8 +27,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
+          <div vaul-drawer-wrapper="" className="">
+            <Navbar />
+            {children}
+          </div>
         </ThemeProvider>
         <Toaster />
       </body>

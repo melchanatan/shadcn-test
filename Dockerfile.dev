@@ -7,7 +7,7 @@ COPY package-lock.json ./
 COPY ./prisma prisma
 
 RUN npm install --silent
-RUN npx prisma migrate dev --name init
+# RUN npx prisma migrate dev --name init
 
 COPY . .
 

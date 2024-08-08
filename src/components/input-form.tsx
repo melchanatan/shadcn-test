@@ -1,9 +1,11 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { Button } from "@/components/ui/button";
+import { ButtonLoading } from "@/components/button-loading";
 import {
   Form,
   FormControl,
@@ -19,16 +21,19 @@ import { Label } from "@/components/ui/label";
 import { userPostSchema } from "@/lib/validation/user";
 import { stringify } from "querystring";
 import { parseSonnerError } from "@/lib/utils";
-
-
+import NavDrawer from '@/components/form-drawer';
+import FormDrawer from "@/components/form-drawer";
 
 export const InputForm = () => {
   const form = useForm<z.infer<typeof userPostSchema>>({
     resolver: zodResolver(userPostSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
   });
 
-  async function onSubmit(data: z.infer<typeof userPostSchema>) {
-
+  function onSubmitSonnerLoader(data: z.infer<typeof userPostSchema>) {
     const response = fetch("/api/user", {
       method: "POST",
       headers: {
@@ -49,21 +54,31 @@ export const InputForm = () => {
         return `${errorStatus} Something went wrong :(`
       }
     })
+  }
 
-    // if (!response?.ok) {
-    //   if (response.status === 409) return toast.warning('username already taken')
+  async function onSubmitButtonLoader(data: z.infer<typeof userPostSchema>) {
+    const response = await fetch("/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-    //   return toast.warning('Something went wrong :(', {
-    //     description: 'please try again later.',
-    //   });
-    // }
+    if (!response?.ok) {
+      if (response.status === 409) return toast.warning('username already taken')
 
-    // return toast.success('Successfully update value');
+      return toast.warning('Something went wrong :(', {
+        description: 'please try again later.',
+      });
+    }
+
+    return toast.success('Successfully update value');
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmitSonnerLoader)} className="space-y-8">
         <FormField
           control={form.control}
           name="username"
@@ -91,7 +106,14 @@ export const InputForm = () => {
             </FormItem>
           )}
         ></FormField>
-        <Button type="submit">Submit</Button>
+        <div className="gap-4 flex">
+          {
+            form.formState.isSubmitting ?
+              <ButtonLoading /> :
+              <Button type="submit">Submit</Button>
+          }
+          <FormDrawer />
+        </div>
       </form>
     </Form>
   );
