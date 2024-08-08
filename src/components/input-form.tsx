@@ -18,6 +18,7 @@ import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { userPostSchema } from "@/lib/validation/user";
 import { stringify } from "querystring";
+import { parseSonnerError } from "@/lib/utils";
 
 
 
@@ -27,23 +28,37 @@ export const InputForm = () => {
   });
 
   async function onSubmit(data: z.infer<typeof userPostSchema>) {
-    const response = await fetch("/api/user", {
+
+    const response = fetch("/api/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+    });
+
+    toast.promise(response, {
+      loading: 'Loading...',
+      success: (data: Response) => {
+        return `${data.status} successfully create user`;
+      },
+      error: (error: string) => {
+        const errorStatus: number = parseSonnerError(error)
+        if (errorStatus === 409) return 'username already taken'
+
+        return `${errorStatus} Something went wrong :(`
+      }
     })
 
-    if (!response?.ok) {
-      if (response.status === 409) return toast.warning('username already taken')
+    // if (!response?.ok) {
+    //   if (response.status === 409) return toast.warning('username already taken')
 
-      return toast.warning('Something went wrong :(', {
-        description: 'please try again later.',
-      });
-    }
+    //   return toast.warning('Something went wrong :(', {
+    //     description: 'please try again later.',
+    //   });
+    // }
 
-    return toast.success('Successfully update value');
+    // return toast.success('Successfully update value');
   }
 
   return (

@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { PrismaClient, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 import { userPostSchema } from "@/lib/validation/user";
 
@@ -13,10 +13,16 @@ export async function GET() {
   }
 }
 
+const delay = (delayInms) => {
+  return new Promise((resolve) => setTimeout(resolve, delayInms));
+};
+
 export async function POST(req: Request) {
   try {
     const json = await req.json();
     const body = userPostSchema.parse(json);
+
+    await delay(1000);
 
     await db.user.create({
       data: {
