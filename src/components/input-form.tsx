@@ -35,15 +35,15 @@ export const InputForm = () => {
       body: JSON.stringify(data),
     })
 
-    console.log(response.ok)
+    if (!response?.ok) {
+      if (response.status === 409) return toast.warning('username already taken')
 
-    if (response?.ok) {
-      return toast(`Sucx ${response.ok}`, {
-        description: "shit",
+      return toast.warning('Something went wrong :(', {
+        description: 'please try again later.',
       });
     }
 
-    return toast("Successfully update value");
+    return toast.success('Successfully update value');
   }
 
   return (

@@ -1,4 +1,6 @@
 import { db } from "@/lib/db";
+import { PrismaClient, Prisma } from "@prisma/client";
+
 import { userPostSchema } from "@/lib/validation/user";
 
 export async function GET() {
@@ -13,19 +15,24 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    const json = await req.json()
-    const body = userPostSchema.parse(json)
-  
+    const json = await req.json();
+    const body = userPostSchema.parse(json);
+
     await db.user.create({
       data: {
         username: body.username,
-        password: body.password
-      }
+        password: body.password,
+      },
     });
 
-    return new Response("successfully create user")
-  } catch (error) {
-    return new Response("Something went wrong", {status: 501})
+    return new Response("successfully create user");
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError)
+      if (e.code === "P2002")
+        return new Response(
+          "There is a unique constraint violation, a new user cannot be created with this username",
+          { status: 409 }
+        );
+    return new Response("Something went wrong", { status: 501 });
   }
-  
 }
