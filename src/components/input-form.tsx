@@ -21,16 +21,13 @@ import { Label } from "@/components/ui/label";
 import { userPostSchema } from "@/lib/validation/user";
 import { stringify } from "querystring";
 import { parseSonnerError } from "@/lib/utils";
-import NavDrawer from '@/components/form-drawer';
-import FormDrawer from "@/components/form-drawer";
+import NavDrawer from '@/components/form-delete-drawer';
+import FormDrawer from "@/components/form-delete-drawer";
+import FormDeleteDrawer from "@/components/form-delete-drawer";
 
 export const InputForm = () => {
   const form = useForm<z.infer<typeof userPostSchema>>({
     resolver: zodResolver(userPostSchema),
-    defaultValues: {
-      username: "",
-      password: "",
-    },
   });
 
   function onSubmitSonnerLoader(data: z.infer<typeof userPostSchema>) {
@@ -112,7 +109,7 @@ export const InputForm = () => {
               <ButtonLoading /> :
               <Button type="submit">Submit</Button>
           }
-          <FormDrawer />
+          <FormDeleteDrawer />
         </div>
       </form>
     </Form>

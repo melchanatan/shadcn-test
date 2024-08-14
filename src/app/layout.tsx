@@ -1,15 +1,20 @@
 import "@/styles/globals.css";
-import { Inter as FontSans } from "next/font/google";
+import { IBM_Plex_Sans_Thai as FontSans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import Navbar from "@/components/navbar";
+import { Navbar } from "@/components/navbar";
 
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 
 const fontSans = FontSans({
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (

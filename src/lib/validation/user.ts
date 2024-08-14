@@ -8,3 +8,7 @@ export const userPostSchema = z.object({
     message: "Password must be at least 6 characters.",
   }),
 });
+
+export const userPostIdSchema = z.object({
+  id: z.number(),
+});
