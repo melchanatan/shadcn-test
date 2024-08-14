@@ -38,6 +38,8 @@ export const NavbarMenu = () => {
 }
 
 const MobileMenu = () => {
+    if (NAV_LINKS.length == 0) return <></>
+
     return (
         <Sheet>
             <SheetTrigger>
