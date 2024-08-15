@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { IBM_Plex_Sans_Thai as FontSans } from "next/font/google";
+import { Kanit as FontSans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 

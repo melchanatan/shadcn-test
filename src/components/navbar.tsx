@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import React from "react";
 import { LOGO_IMG } from "@/constant/global";
-import Link from 'next/link'
+import Link from "next/link";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Button } from "./ui/button";
 import useScrollThreshold from "@/hooks/use-scroll-threshold";
@@ -16,16 +16,16 @@ const scrolledStyle: React.CSSProperties = {
   padding: "1rem 1%",
   boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
   borderWidth: "1px",
-}
+};
 
 export const Navbar = () => {
   // handle cool on scroll animation
   // add scrolledStyle styling to <nav /> when user scroll pass a certain threshold
-  const isScrolled = useScrollThreshold()
+  const isScrolled = useScrollThreshold();
 
   return (
     <nav
-      className="bg-background/20 backdrop-blur-md py-4 sticky w-full top-0 z-10 transition-all duration-300"
+      className="bg-white/10 backdrop-blur-sm py-4 fixed w-full top-0 z-10 transition-all duration-300"
       style={isScrolled ? scrolledStyle : {}}
     >
       <span className="container flex justify-between items-center">
@@ -40,5 +40,3 @@ export const Navbar = () => {
     </nav>
   );
 };
-
-

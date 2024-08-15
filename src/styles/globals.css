@@ -71,3 +71,7 @@
 .container {
   @apply max-w-screen-xl mx-auto px-8;
 }
+
+.label {
+  @apply flex items-center gap-2;
+}

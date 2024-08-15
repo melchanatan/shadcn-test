@@ -1,24 +1,19 @@
-"use client";
-import { Switch } from "@/components/ui/switch";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { DatePickerForm } from "@/components/date-form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { PhoneInput } from "@/components/ui/phone-input";
-import { InputForm } from "@/components/input-form";
-import NavDrawer from "@/components/form-delete-drawer";
+import { StoreDetails } from "@/components/store-details";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="container flex items-start justify-center h-[60dvh] flex-col">
-      <div className="flex items-center space-x-2"></div>
+    <main className="max-w-screen-sm flex items-start justify-center h-dvh flex-col ">
+      <Image
+        src="/placeholder.jpg"
+        alt="restuarant image"
+        width={500}
+        height={500}
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute py-20 w-full bottom-0 z-10 bg-gradient-to-t from-black to-transparent">
+        <StoreDetails className="px-6" />
+      </div>
     </main>
   );
 }
